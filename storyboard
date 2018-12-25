@@ -1,0 +1,14 @@
+###StartScene:
+1. Choose Ship:
+    - Shuttle
+    - Lunar
+    - Shadow
+2. Choose Game Type:
+    - Fight for new planet
+        * If Aliens win you loose one of your planets.
+        * If you win you get one of the Aliens planet.
+    - Patrol
+        * You are on a patrol around.
+        * Be sure to not leave an Alien alive.
+
+

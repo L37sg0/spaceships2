@@ -1,0 +1,192 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport", content="width=device.width, initial.scale=1.0"/>
+    <title>SpaceShips</title>
+    <script src="js/phaser.min.js"></script>
+    <script src="js/vars.js"></script>
+    <script src="js/funcs.js"></script>
+    <script src="js/scenes.js"></script>
+    <script src="js/planets.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/boss.js"></script>
+    <script src="js/aliens.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script src="https://connect.facebook.net/en_US/fbinstant.6.0.js"></script>
+</head>
+<body>
+<script>
+//Loading of the FB sdk
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '988441154665721',//Id of the game
+          xfbml      : true,
+          version    : 'v3.0'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    FBInstant.initializeAsync().then(function()
+    {
+       // game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips",{preload: preload, create: create, update: update}); 
+    });
+
+    FBInstant.startGameAsync().then(function()
+    {
+        
+        /*contextType = FBInstant.context.getType();
+
+        
+        playerPic = FBInstant.player.getPhoto();
+        playerId = FBInstant.player.getID();*/
+
+        update();
+    });
+
+    //Starter for localhost testing:
+    game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips",{preload: preload, create: create, update: update}); 
+
+
+    function preload ()
+    {
+
+        //load phaser game basics
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.pageALignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.stage.backgroundColor = "#258";
+        col = game.world.width/40;
+        row = game.world.height/40/2;
+
+        //loading game audio
+       /* game.load.audio("boom", "audio/explosion.mp3");
+        game.load.audio("shoot", "audio/shoot.mp3");
+        game.load.audio("soundtrack", "audio/soundtrack.mp3");*/
+
+        //Loading animation for the game
+        for (var i=0; i < assets.length; i++)
+        {
+            //loading game images
+            game.load.image(assets[i].name, assets[i].src);  
+            var progress = ((i+1)/assets.length) * 100;
+            FBInstant.setLoadingProgress(progress);
+        }
+    }
+
+    function create ()
+    {
+        //create game soundtrack and sounds
+       /* boom = game.add.audio("boom");
+        shoot = game.add.audio("shoot");
+        soundtrack = game.add.audio("soundtrack");
+
+        //set volume of the sounds
+        boom.volume = 0.1;
+        shoot.volume = 0.1;
+        soundtrack.volume = 0.5;
+
+        //load sounds decode to play them every time on call
+        game.sound.setDecodedCallback([ boom, shoot, soundtrack ], update, this);
+        //play and loop soundtrack
+        soundtrack.play();
+        soundtrack.loopFull(1);*/
+
+        // create game physics
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        //create game objects
+        StartScene.initializeChooseShip()
+        //initBackground();
+        //initShip();
+        //initBullets();
+        //initBossHealth();
+        //initAliens();
+        //initText();
+
+        //create game timer
+      /*  bossTimer = game.time.create(false);
+        timer = game.time.create(false);
+        timer.loop(bulletTime, fireBullet);
+        timer.loop(alienTime, createAliensWave);
+        timer.loop(newBoss, initBoss);*/
+
+        
+
+    }
+
+    function update ()
+    {
+
+        //set tiling background speed
+        back.tilePosition.y += 2;
+        if(shipBody){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            shipBody.y = game.input.y || game.world.height-80;
+        } 
+/*
+        //check for collisions
+        game.physics.arcade.collide(bullets, aliens, bulletHitAlien);
+        game.physics.arcade.collide(ship, aliens, alienHitShip);
+        game.physics.arcade.collide(boss, bullets, bulletHitBoss);
+        game.physics.arcade.collide(bossbullets, ship, bossbulletHitShip);
+
+        //set tiling background speed
+        back.tilePosition.y += 2;        
+
+        if(playing) 
+        {
+            //update ship position
+            ship.x = game.input.x || game.world.width*0.5;
+            
+            //update scores and lives
+            scoreText.setText("Scores: "+scores);
+            livesText.setText("Lives: "+lives);  
+
+            //update boss hp bar
+            bossText.setText(bossHP); 
+            health.width = bossHP; 
+
+            //check if an alien object leave the screen and destroy it
+            aliens.forEach(function(newAlien)
+            {
+                if(newAlien.body.y >= game.world.height)
+                {
+                    newAlien.destroy();  
+                    console.log("alien down!!");
+                    scores -= 1;      
+                }
+            }); 
+            //check if scores%50==0 drops a life ball
+            /*if(scores%50==0)
+            {
+                initLife();
+            }*/
+
+            /*check if lives go < 0
+            if(lives<=0)
+            {
+                endGame(); //GAME OVER
+            }
+
+        }*/
+    }
+
+</script>
+
+</body>
+</html>
