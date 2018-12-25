@@ -142,13 +142,8 @@ var FightForPlanetScene = {
         PlayerPlanet.initialize();
         AlienPlanet.initialize();
         Boss.initialize();
-//        initBoss();
-       // initAliens();
-       // createAliensWave();
-        Aliens.initialize();
         shipTimer.start();
-        bossTimer.start();
-        aliensTimer.start();
+        Aliens.initialize();
     }
 }
 var PatrolScene = {
@@ -157,6 +152,7 @@ var PatrolScene = {
         //changeBackground('background2');
         StartScene.closeTypeMenu();
         shipTimer.start();
+        Aliens.initialize();
     }
 }
 

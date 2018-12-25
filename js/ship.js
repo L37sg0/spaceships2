@@ -2,13 +2,16 @@
 
 var shipBody;
 var Ship = {
+    shootTime : 100,
+
+    shootSpeed : 500,
+
     initialize : function(){
 
         if(shipBody)
         {
             Ship.delete();
         }
-
         shipDamage = this.damage;
 
         shipBody = game.add.sprite(game.world.width*0.5, game.world.height-60, this.sprite_image);        
@@ -30,7 +33,7 @@ var Ship = {
         shipBullets.setAll("checkWorldBounds", true);
         
         shipTimer = game.time.create(false);
-        shipTimer.loop(bulletTime, Ship.shoot);
+        shipTimer.loop(Ship.shootTime, Ship.shoot);
     },
     delete : function(){
         shipBody.destroy();
@@ -43,7 +46,7 @@ var Ship = {
             shipBulletX = shipBody.x;
             shipBulletY = shipBody.y-shipBody.height/2;
             shipBullet.reset(shipBulletX, shipBulletY);
-            shipBullet.body.velocity.y -= bulletSpeed;
+            shipBullet.body.velocity.y -= Ship.shootSpeed;
             console.log('fire');
         }
     }

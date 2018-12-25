@@ -43,20 +43,14 @@
     planets = ['planet1', 'planet2', 'planet3', 'planet4', 'planet5', 'planet6', 'planet7', 'planet8', 'planet9', 'planet10', ]
 
 
+    var shipBullets;
 
     var lb;
     var highscores;
     var table;
 
-    var bullets;
-    var newBullet;
-    var bulletX;
-    var bulletY;
-    var bulletSpeed = 500;
-    var bulletTime = 100;
 
     var aliens;
-    var newAlien;
     var alienInfo;
 
 

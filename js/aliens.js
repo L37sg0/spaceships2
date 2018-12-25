@@ -9,11 +9,12 @@ var Aliens = {
         width: 40,
         height: 30,
         offset: {
-            top: -60,
+            top: 0,
             left: 20
         },
         padding: 0
     },
+
     initialize : function(){
         aliens = game.add.group();
         aliens.enableBody = true;
@@ -21,57 +22,34 @@ var Aliens = {
 
         aliensTimer = game.time.create(false);
         aliensTimer.loop(this.alienTime, Aliens.newWave);
+        aliensTimer.start();
     },
-    newWave : function(){
+
+    newWave : function(){//Creates new wave of aliens
+        //First checks if an alien object leave the screen and destroy it
+        aliens.forEach(function(alien)
+        {
+            if(alien.body.y >= game.world.height)
+            {
+                alien.destroy();  
+                console.log("alien down!!");
+                //scores -= 1;      
+            }
+        }); // And here the wave is created
         for(c=0;c<col;c++)
         {
             for(r=0;r<1;r++)
             {
-                var alienX = (c*(this.alienInfo.width+this.alienInfo.padding))+this.alienInfo.offset.left;
-                var alienY = (r*(this.alienInfo.height+this.alienInfo.padding))+this.alienInfo.offset.top;
+                let alienX = (c*(Aliens.alienInfo.width+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.left;
+                let alienY = (r*(Aliens.alienInfo.height+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.top;
     
-                newAlien = aliens.create(alienX, alienY, "alien");
-                newAlien.scale.setTo(this.alienInfo.width/newAlien.width, this.alienInfo.height/newAlien.height);
-                newAlien.anchor.set(0.5, 0.5);
-                newAlien.body.velocity.set(0, this.alienSpeed);
-                newAlien.body.immovable = true;
+                alien = aliens.create(alienX, alienY, "alien");
+
+                alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
+                alien.anchor.set(0.5, 0.5);
+                alien.body.velocity.set(0, Aliens.alienSpeed);
+                alien.body.immovable = true;
             }
         }
-
     }
 }
-
-function initAliens()
-{
-    alienInfo = {
-        width: 40,
-        height: 30,
-        offset: {
-            top: -60,
-            left: 20
-        },
-        padding: 0
-    };
-    aliens = game.add.group();
-    aliens.enableBody = true;
-    aliens.PhysicBodyType = Phaser.Physics.ARCADE;
-}
-
-function createAliensWave()
-{
-    for(c=0;c<col;c++)
-    {
-        for(r=0;r<1;r++)
-        {
-            var alienX = (c*(alienInfo.width+alienInfo.padding))+alienInfo.offset.left;
-            var alienY = (r*(alienInfo.height+alienInfo.padding))+alienInfo.offset.top;
-
-            newAlien = aliens.create(alienX, alienY, "alien");
-            newAlien.scale.setTo(alienInfo.width/newAlien.width, alienInfo.height/newAlien.height);
-            newAlien.anchor.set(0.5, 0.5);
-            newAlien.body.velocity.set(0, alienSpeed);
-            newAlien.body.immovable = true;
-        }
-    }
-}
-

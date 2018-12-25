@@ -43,6 +43,7 @@ var Boss = {
         
         bossTimer = game.time.create(false);
         bossTimer.loop(bossBulletTime, Boss.shoot);
+        bossTimer.start();
     },
     delete : function(){
         bossBody.destroy();
@@ -57,7 +58,6 @@ var Boss = {
             bossBullet.reset(bossBulleX, bossBulleY);
             bossBullet.scale.setTo(0.5,0.5);
             bossBullet.body.velocity.y += 200;
-            console.log(' boss fire');
         }
     }
 }

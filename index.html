@@ -60,7 +60,7 @@
     });
 
     //Starter for localhost testing:
-    game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips",{preload: preload, create: create, update: update}); 
+    game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips2",{preload: preload, create: create, update: update}); 
 
 
     function preload ()
@@ -131,6 +131,9 @@
 
     function update ()
     {
+        if(shipBullets && aliens){
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien);
+        }
 
         //set tiling background speed
         back.tilePosition.y += 2;
@@ -138,6 +141,7 @@
             shipBody.x = game.input.x || game.world.width*0.5;
             shipBody.y = game.input.y || game.world.height-80;
         } 
+
 /*
         //check for collisions
         game.physics.arcade.collide(bullets, aliens, bulletHitAlien);
