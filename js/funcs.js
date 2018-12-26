@@ -62,44 +62,42 @@
     {
         bullet.kill();
         explode(alien);
-        scores++;
-        console.log("hit!");
+    }
+
+    function alienHitShip(shipBody, alien)
+    {
+        shipEnergy.width -= 0.5; // Ship energy bar is 2px wide for a point, so we have to decrease it with 0.5, not 1.
+        
+        if(shipEnergy.width <= 0){
+            Ship.delete();
+        }
+        explode(alien);
+    }
+
+    function bulletHitAlienPlanet(alienPlanetBody, bullet){
+        bullet.kill();
+        alienPlanetText.setText(alienPlanetText.text - shipDamage);
     }
 
     function bulletHitBoss(boss, bullet)
     {   
-        bullet.kill();
-        bossHP-=1;
-        if(!bossHP)
+        if(bossHealth.width <= 0)
         {
-            explode(boss);
-            scores += 100;
-            console.log("You win!!");
-            bossTimer.stop();
-            bossbullets.destroy();
-            bossHP = "";
+            Boss.delete();
         }
-        console.log("hit boss");
+        bossHealth.width -= shipDamage/2;
+        bullet.kill();
     }
 
-    function alienHitShip(ship, alien)
-    {
-        lives -= 1;
-        explode(alien);
-        explode(ship);
-        console.log("alien ship killed");
-        game.time.events.add(Phaser.Timer.SECOND * 0.5, initShip, this);
-        console.log("ALIEN: ship alives!!");
-    }
 
-    function bossbulletHitShip()
+    function bossBulletHitShip(bullet)
     {
-        lives -= 1;
-        bossbullet.kill();
-        explode(ship);
-        console.log("boss ship killed");
-        game.time.events.add(Phaser.Timer.SECOND * 0.5, initShip, this);
-        console.log("BOSS: ship alives!!!");
+        bullet.kill();
+        shipEnergy.width -= bossDamage/2;
+        if(shipEnergy.width <= 0){
+            Ship.delete();
+        }
+        console.log('ship hitted')
     }
 
     function explode(obj)
@@ -109,7 +107,7 @@
             let killTween = game.add.tween(obj.scale);
             killTween.to({x: 0, y: 0}, 200, Phaser.Easing.Linear.None);
             killTween.onComplete.addOnce(function(){
-                obj.destroy();
+                obj.kill();
                 obj = 0;
             }, this);
             killTween.start();

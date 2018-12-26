@@ -131,15 +131,27 @@
 
     function update ()
     {
-        if(shipBullets && aliens){
-            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien);
+        if(shipBullets){
+            //game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien);
         }
 
+        
         //set tiling background speed
         back.tilePosition.y += 2;
-        if(shipBody){
+        if(playing===10){
             shipBody.x = game.input.x || game.world.width*0.5;
             shipBody.y = game.input.y || game.world.height-80;
+           // game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+            game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+        } 
+        if(playing===11){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            //shipBody.y = game.input.y || game.world.height-80;
+            game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+           // game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet)
         } 
 
 /*

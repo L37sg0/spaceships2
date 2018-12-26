@@ -17,8 +17,8 @@ var Aliens = {
 
     initialize : function(){
         aliens = game.add.group();
+        game.physics.enable(aliens, Phaser.Physics.ARCADE);
         aliens.enableBody = true;
-        aliens.PhysicBodyType = Phaser.Physics.ARCADE;
 
         aliensTimer = game.time.create(false);
         aliensTimer.loop(this.alienTime, Aliens.newWave);
@@ -32,8 +32,6 @@ var Aliens = {
             if(alien.body.y >= game.world.height)
             {
                 alien.destroy();  
-                console.log("alien down!!");
-                //scores -= 1;      
             }
         }); // And here the wave is created
         for(c=0;c<col;c++)
@@ -47,8 +45,9 @@ var Aliens = {
 
                 alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
                 alien.anchor.set(0.5, 0.5);
+                //alien.body.immovable = true;
+                //alien.body.bounce.set(1);
                 alien.body.velocity.set(0, Aliens.alienSpeed);
-                alien.body.immovable = true;
             }
         }
     }

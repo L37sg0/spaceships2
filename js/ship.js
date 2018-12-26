@@ -17,15 +17,18 @@ var Ship = {
         shipBody = game.add.sprite(game.world.width*0.5, game.world.height-60, this.sprite_image);        
         shipBody.scale.setTo(40/shipBody.width, 60/shipBody.height);
         game.physics.enable(shipBody, Phaser.Physics.ARCADE);
+        
         shipBody.enableBody = true;
+        //shipBody.body.bounce.set(1);
+        shipBody.body.immovable = true;
         shipBody.anchor.set(0.5);
 
-        shipHealt = game.add.sprite(game.world.width-70, game.world.height-20, 'energy');
-        shipHealt.scale.setTo(this.energy/shipHealt.width, 10/shipHealt.height);
+        shipEnergy = game.add.sprite(game.world.width-70, game.world.height-20, 'energy');
+        shipEnergy.scale.setTo(this.energy/shipEnergy.width, 10/shipEnergy.height);
 
         shipBullets = game.add.group();
         shipBullets.enableBody = true;
-        shipBullets.physicsBodyType = Phaser.Physics.ARCADE;
+        game.physics.enable(shipBullets, Phaser.Physics.ARCADE);
         shipBullets.createMultiple(30, this.shoot);
         shipBullets.setAll("anchor.x", 0.5);
         shipBullets.setAll("anchor.y", 1);
@@ -36,8 +39,10 @@ var Ship = {
         shipTimer.loop(Ship.shootTime, Ship.shoot);
     },
     delete : function(){
-        shipBody.destroy();
-        shipHealt.destroy();
+        explode(shipBody);
+        shipEnergy.destroy();
+        shipBullets.destroy();
+        shipTimer.stop();
     },
     shoot : function(){
         shipBullet = shipBullets.getFirstExists(false);

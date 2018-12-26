@@ -44,6 +44,9 @@
 
 
     var shipBullets;
+    var bossBullets;
+    //var shipBody;
+    var bossBody;
 
     var lb;
     var highscores;

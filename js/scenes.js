@@ -137,19 +137,20 @@ var FightForPlanetScene = {
     time        : 60,
 
     initialize  : function(){
+        playing = 10;
         changeBackground('background2');
         StartScene.closeTypeMenu();
         PlayerPlanet.initialize();
         AlienPlanet.initialize();
         Boss.initialize();
         shipTimer.start();
-        Aliens.initialize();
+        //Aliens.initialize();
     }
 }
 var PatrolScene = {
 
     initialize  : function(){
-        //changeBackground('background2');
+        playing = 11;
         StartScene.closeTypeMenu();
         shipTimer.start();
         Aliens.initialize();

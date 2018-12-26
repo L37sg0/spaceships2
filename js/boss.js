@@ -29,12 +29,12 @@ var Boss = {
         bossBody.checkWorldBounds = true;
         bossBody.body.velocity.set(bossVel, 0);
 
-        bossHealt = game.add.sprite(10, 10, 'hp');
-        bossHealt.scale.setTo(energy/bossHealt.width, 10/bossHealt.height);
+        bossHealth = game.add.sprite(10, 10, 'hp');
+        bossHealth.scale.setTo(energy/bossHealth.width, 10/bossHealth.height);
 
         bossBullets = game.add.group();
         bossBullets.enableBody = true;
-        bossBullets.physicsBodyType = Phaser.Physics.ARCADE;
+        game.physics.enable(bossBullets, Phaser.Physics.ARCADE);
         bossBullets.createMultiple(30, shoot);
         bossBullets.setAll("anchor.x", 0.5);
         bossBullets.setAll("anchor.y", 1);
@@ -46,8 +46,10 @@ var Boss = {
         bossTimer.start();
     },
     delete : function(){
-        bossBody.destroy();
-        bossHealt.destroy();
+        explode(bossBody);
+        bossHealth.destroy();
+        bossBullets.destroy();
+        bossTimer.stop();
     },
     shoot : function(){
         bossBullet = bossBullets.getFirstExists(false);
