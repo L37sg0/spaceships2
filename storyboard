@@ -10,5 +10,17 @@
     - Patrol
         * You are on a patrol around.
         * Be sure to not leave an Alien alive.
+        * Watch the Gauge in the top left corner.If 50 aliens get around you,
+        they will organise attack against 
+        one of your planets and you'll have to defend it for 60 seconds.
+        * Watch the Gauge in top right to see how much distance is left to find new Alien Planet.
+        When you reach right place you'll have a chance to invide one of the Alien planets.
+    - Defend planet
+        * Aliens will organise attack against one of your planets.
+        * Be sure to defend it for 60 seconds.
+    - Invide Planet
+        * You'll have 60 seconds to take of planet shield and invide it.
+        * Watch out for the Aliens and Bosses. They'll use all their force
+        to take you down.
 
 

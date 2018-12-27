@@ -20,11 +20,14 @@ var AlienPlanet = {
             backgroundColor: "#2582583D"
         });
         alienPlanetText.anchor.set(0.5);
+    },
+    delete      : function(){
+        explode(alienPlanetBody);
+        alienPlanetText.destroy();
     }
 }
 
 var PlayerPlanet = {
-    playerPlanetHealth : 90,
 
     initialize : function(){
         let planet = planets[game.rnd.integerInRange(0,9)];
@@ -44,5 +47,9 @@ var PlayerPlanet = {
             backgroundColor: "#2582583D"
         });
         playerPlanetText.anchor.set(0.5);
+    },
+    delete      : function(){
+        explode(playerPlanetBody);
+        playerPlanetText.destroy();
     }
 }

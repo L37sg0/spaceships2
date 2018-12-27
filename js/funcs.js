@@ -66,17 +66,28 @@
 
     function alienHitShip(shipBody, alien)
     {
-        shipEnergy.width -= 0.5; // Ship energy bar is 2px wide for a point, so we have to decrease it with 0.5, not 1.
+        shipEnergy.width -= 1; 
         
         if(shipEnergy.width <= 0){
             Ship.delete();
         }
         explode(alien);
     }
+    function alienHitPlanet(playerPlanetBody, alien)
+    {
+        playerPlanetText.setText(playerPlanetText.text - 3);
+        explode(alien);
+        if(playerPlanetText.text <= 0){
+            PlayerPlanet.delete();
+        }
+    }
 
     function bulletHitAlienPlanet(alienPlanetBody, bullet){
         bullet.kill();
         alienPlanetText.setText(alienPlanetText.text - shipDamage);
+        if(alienPlanetText.text <= 0){
+            AlienPlanet.delete();
+        }
     }
 
     function bulletHitBoss(boss, bullet)
@@ -85,19 +96,27 @@
         {
             Boss.delete();
         }
-        bossHealth.width -= shipDamage/2;
+        bossHealth.width -= shipDamage;
         bullet.kill();
     }
 
 
-    function bossBulletHitShip(bullet)
+    function bulletHitShip(ship, bullet)
     {
-        bullet.kill();
-        shipEnergy.width -= bossDamage/2;
         if(shipEnergy.width <= 0){
             Ship.delete();
         }
+        shipEnergy.width -= bossDamage;
+        bullet.kill();
         console.log('ship hitted')
+    }
+    
+    function bulletHitPlayerPlanet(playerPlanetBody, bullet){
+        bullet.kill();
+        playerPlanetText.setText(playerPlanetText.text - bossDamage);
+        if(playerPlanetText.text <= 0){
+            PlayerPlanet.delete();
+        }
     }
 
     function explode(obj)
@@ -107,7 +126,7 @@
             let killTween = game.add.tween(obj.scale);
             killTween.to({x: 0, y: 0}, 200, Phaser.Easing.Linear.None);
             killTween.onComplete.addOnce(function(){
-                obj.kill();
+                obj.destroy();
                 obj = 0;
             }, this);
             killTween.start();

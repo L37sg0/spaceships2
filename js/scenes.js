@@ -3,9 +3,9 @@ var StartScene = {// This is the starting scene of the game. It's an object
     title_text          : 'Space Ships', // The game title text
     subtitle1_text       : 'Choose your ship:', // The subtitle text
     subtitle2_text       : 'Choose game type:', // The second subtitle text
-    ship1_text          : 'Shuttle:\nEnergy=60\nDamage=1', //Next 3 are the names of the spaceships
-    ship2_text          : 'Lunar:\nEnergy=50\nDamage=2',   // with their energy and damage they deal
-    ship3_text          : 'Shadow:\nEnergy=40\nDamage=3',
+    ship1_text          : 'Shuttle:\nEnergy=80\nDamage=1', //Next 3 are the names of the spaceships
+    ship2_text          : 'Lunar:\nEnergy=30\nDamage=2',   // with their energy and damage they deal
+    ship3_text          : 'Shadow:\nEnergy=20\nDamage=3',
     
     //ship_image : 'ship2',
 
@@ -19,7 +19,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship1Text.anchor.set(0.5);
         ship1Text.inputEnabled = true;
-        ship1Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship1', 'energy':60, 'shoot':'bullet1', 'damage':1}, this);
+        ship1Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship1', 'energy':80, 'shoot':'bullet1', 'damage':1}, this);
         ship1Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship1Image = game.add.sprite(50, 145, 'ship1');
         ship1Image.scale.setTo(ship1Text.width/2/ship1Image.width, ship1Text.height/ship1Image.height);
@@ -33,7 +33,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship2Text.anchor.set(0.5);
         ship2Text.inputEnabled = true;
-        ship2Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship2', 'energy':50, 'shoot':'bullet2', 'damage':2}, this);
+        ship2Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship2', 'energy':30, 'shoot':'bullet2', 'damage':2}, this);
         ship2Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship2Image = game.add.sprite(50, 215, 'ship2');
         ship2Image.scale.setTo(ship2Text.width/2/ship2Image.width, ship2Text.height/ship2Image.height);
@@ -47,7 +47,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship3Text.anchor.set(0.5);
         ship3Text.inputEnabled = true;
-        ship3Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship3', 'energy':40, 'shoot':'bullet3', 'damage':3}, this);
+        ship3Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship3', 'energy':20, 'shoot':'bullet3', 'damage':3}, this);
         ship3Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship3Image = game.add.sprite(50, 285, 'ship3');
         ship3Image.scale.setTo(ship3Text.width/2/ship3Image.width, ship3Text.height/ship3Image.height);
@@ -151,6 +151,27 @@ var PatrolScene = {
 
     initialize  : function(){
         playing = 11;
+        StartScene.closeTypeMenu();
+        GaugeAliens.initialize();
+        shipTimer.start();
+        Aliens.initialize();
+    }
+}
+var DefendScene = {
+
+    initialize  : function(){
+        playing = 12;
+        //StartScene.closeTypeMenu();
+        //shipTimer.start();
+        PlayerPlanet.initialize();
+        //Boss.initialize();
+        aliensTimer.start();
+    }
+}
+var InvideScene = {
+
+    initialize  : function(){
+        playing = 13;
         StartScene.closeTypeMenu();
         shipTimer.start();
         Aliens.initialize();

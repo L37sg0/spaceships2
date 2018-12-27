@@ -9,12 +9,12 @@ var Boss = {
         }
         let i = game.rnd.integerInRange(0,3);
         let sprite_image = bosses[i][0];
-        let energy = bosses[i][1];
-        let bossVel = bosses[i][2];
-        let bossBulletTime = bosses[i][3];
+        let energy = bosses[i][1];//*1.2;
+        let bossVel = bosses[i][2]*1.2;
+        let bossBulletTime = bosses[i][3]/1.2;
         let shoot = 'bossbullet';
 
-        bossDamage = game.rnd.integerInRange(2,5);
+        bossDamage = game.rnd.integerInRange(20,25);
 
         bossBody = game.add.sprite(game.world.width*0.5, game.world.height*0.5-100, sprite_image);        
         bossBody.scale.setTo(90/bossBody.width, 90/bossBody.height);

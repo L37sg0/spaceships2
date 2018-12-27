@@ -38,6 +38,7 @@
         {"name":"planet8","src":"img/planet8.png"},
         {"name":"planet9","src":"img/planet9.png"},
         {"name":"planet10","src":"img/planet10.png"},
+        {"name":"red","src":"img/red.png"},
         {"name":"life","src":"img/life.png"}
 ];
     planets = ['planet1', 'planet2', 'planet3', 'planet4', 'planet5', 'planet6', 'planet7', 'planet8', 'planet9', 'planet10', ]
@@ -47,6 +48,8 @@
     var bossBullets;
     //var shipBody;
     var bossBody;
+    var freeAliens;
+    var gaugeAliensText;
 
     var lb;
     var highscores;

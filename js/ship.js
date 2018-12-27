@@ -23,7 +23,7 @@ var Ship = {
         shipBody.body.immovable = true;
         shipBody.anchor.set(0.5);
 
-        shipEnergy = game.add.sprite(game.world.width-70, game.world.height-20, 'energy');
+        shipEnergy = game.add.sprite(game.world.width-90, game.world.height-20, 'energy');
         shipEnergy.scale.setTo(this.energy/shipEnergy.width, 10/shipEnergy.height);
 
         shipBullets = game.add.group();
