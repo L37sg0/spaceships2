@@ -152,7 +152,8 @@ var PatrolScene = {
     initialize  : function(){
         playing = 11;
         StartScene.closeTypeMenu();
-        GaugeAliens.initialize();
+        GaugeInviders.initialize();
+        GaugeDistance.initialize();
         shipTimer.start();
         Aliens.initialize();
     }
@@ -161,11 +162,7 @@ var DefendScene = {
 
     initialize  : function(){
         playing = 12;
-        //StartScene.closeTypeMenu();
-        //shipTimer.start();
         PlayerPlanet.initialize();
-        //Boss.initialize();
-        aliensTimer.start();
     }
 }
 var InvideScene = {
