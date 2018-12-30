@@ -46,10 +46,14 @@
 
     var shipBullets;
     var bossBullets;
-    //var shipBody;
+    var shipBody;
     var bossBody;
     var freeAliens;
-    var gaugeAliensText;
+    var freeAliensText;
+    var distanceText;
+    var planetsText;
+    var playerPlanetBody;
+    var alienPlanetBody;
 
     var lb;
     var highscores;

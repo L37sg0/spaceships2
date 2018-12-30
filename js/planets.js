@@ -3,6 +3,11 @@
 var AlienPlanet = {
 
     initialize : function(){
+        if(alienPlanetBody)
+        {
+            AlienPlanet.setnull();
+        }
+
         let planet = planets[game.rnd.integerInRange(0,9)];
         alienPlanetHealth = game.rnd.integerInRange(50,100);
 
@@ -21,15 +26,27 @@ var AlienPlanet = {
         });
         alienPlanetText.anchor.set(0.5);
     },
+
     delete      : function(){
         explode(alienPlanetBody);
         alienPlanetText.destroy();
+        GaugePlanets.update(1);
+    },
+
+    setnull     : function(){
+        alienPlanetBody.kill();
+        alienPlanetText.kill();
     }
 }
 
 var PlayerPlanet = {
 
     initialize : function(){
+        if(playerPlanetBody)
+        {
+            PlayerPlanet.setnull();
+        }
+
         let planet = planets[game.rnd.integerInRange(0,9)];
         playerPlanetHealth = game.rnd.integerInRange(50,100);
 
@@ -48,8 +65,15 @@ var PlayerPlanet = {
         });
         playerPlanetText.anchor.set(0.5);
     },
+
     delete      : function(){
         explode(playerPlanetBody);
         playerPlanetText.destroy();
+        GaugePlanets.update(-1);
+    }, 
+
+    setnull     : function(){
+        playerPlanetBody.kill();
+        playerPlanetText.kill();
     }
 }

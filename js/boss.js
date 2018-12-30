@@ -5,7 +5,7 @@ var Boss = {
     initialize : function(){
         if(bossBody)
         {
-            Boss.delete();
+            Boss.setnull();
         }
         let i = game.rnd.integerInRange(0,3);
         let sprite_image = bosses[i][0];
@@ -61,5 +61,11 @@ var Boss = {
             bossBullet.scale.setTo(0.5,0.5);
             bossBullet.body.velocity.y += 200;
         }
+    },
+    setnull     : function(){
+        bossBody.kill();
+        bossHealth.kill();
+        bossBullets.destroy();
+        bossTimer.stop();
     }
 }

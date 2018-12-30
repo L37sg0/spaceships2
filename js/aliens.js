@@ -14,8 +14,10 @@ var Aliens = {
         },
         padding: 0
     },
-
     initialize : function(){
+        if(aliens){
+            Aliens.delete();
+        }
         aliens = game.add.group();
         game.physics.enable(aliens, Phaser.Physics.ARCADE);
         aliens.enableBody = true;
@@ -24,10 +26,9 @@ var Aliens = {
         aliensTimer.loop(this.alienTime, Aliens.newWave);
         aliensTimer.start();
     },
-
-
     newWave : function(){//Creates new wave of aliens
         //First checks if an alien object leave the screen and destroy it
+        //console.log(aliens.length);
         aliens.forEach(function(alien)
         {
             if(alien.body.y >= game.world.height)
@@ -35,7 +36,7 @@ var Aliens = {
                 alien.destroy();  
             }
         }); // And here the wave is created
-        let row = game.rnd.integerInRange(2,5);
+        let row = game.rnd.integerInRange(2,3);
         for(c=0;c<col;c++)
         {
             for(r=0;r<row;r++)
@@ -45,18 +46,16 @@ var Aliens = {
                     let alienX = (c*(Aliens.alienInfo.width+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.left;
                     let alienY = (r*(Aliens.alienInfo.height+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.top;
         
-                    alien = aliens.create(alienX, alienY, "alien");
-    
+                    alien = aliens.create(alienX, alienY, "alien");  
                     alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
                     alien.anchor.set(0.5, 0.5);
-                    //alien.body.immovable = true;
-                    //alien.body.bounce.set(1);
                     alien.body.velocity.set(0, Aliens.alienSpeed);
                 }
             }
         }
     },
     delete  :  function(){
+        aliens.destroy();
         aliensTimer.stop();
     }
 }

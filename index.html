@@ -131,36 +131,42 @@
     }
 
     function update ()
-    {
-        if(shipBullets){
-            //game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien);
-        }
-
-        
+    {        
         //set tiling background speed
         back.tilePosition.y += 2;
-        //FightForPlanetScene update:
+
+        // Fight For Planet Scene update
         if(playing===10){
             shipBody.x = game.input.x || game.world.width*0.5;
             shipBody.y = game.input.y || game.world.height-80;
-            //game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
-           // game.physics.arcade.collide(playerPlanetBody, aliens, alienHitPlanet, null, this);
+            
             game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
             game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
             game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
             game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
             game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
         } 
+
         // PatrollScene update
         if(playing===11){
             shipBody.x = game.input.x || game.world.width*0.5;
-            //shipBody.y = game.input.y || game.world.height-80;
+            shipBody.y = game.input.y || game.world.height-80;
             game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
             game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
-            if(freeAliens >= 50){
-                DefendScene.initialize();
-            }                
+            if(playerPlanetBody){
+                game.physics.arcade.collide(playerPlanetBody, aliens, alienHitPlanet, null, this);
+                game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
+            }
+            if(alienPlanetBody){
+                game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+            }
+            if(bossBody){
+                game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+
+            }
         } 
+
         // DefendScene update
         if(playing===12){
             shipBody.x = game.input.x || game.world.width*0.5;
@@ -168,65 +174,26 @@
             game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
             game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
             game.physics.arcade.collide(playerPlanetBody, aliens, alienHitPlanet, null, this);
-            if(freeAliens >= 100){
-                if(bossBody){
-                    game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
-                    game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
-                    game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
-                }
-                if(!bossBody){
-                    Boss.initialize();
-                }
-            } 
-
+            if(bossBody){
+                game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+                game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
+            }
         }
 
-/*
-        //check for collisions
-        game.physics.arcade.collide(bullets, aliens, bulletHitAlien);
-        game.physics.arcade.collide(ship, aliens, alienHitShip);
-        game.physics.arcade.collide(boss, bullets, bulletHitBoss);
-        game.physics.arcade.collide(bossbullets, ship, bossbulletHitShip);
-
-        //set tiling background speed
-        back.tilePosition.y += 2;        
-
-        if(playing) 
-        {
-            //update ship position
-            ship.x = game.input.x || game.world.width*0.5;
-            
-            //update scores and lives
-            scoreText.setText("Scores: "+scores);
-            livesText.setText("Lives: "+lives);  
-
-            //update boss hp bar
-            bossText.setText(bossHP); 
-            health.width = bossHP; 
-
-            //check if an alien object leave the screen and destroy it
-            aliens.forEach(function(newAlien)
-            {
-                if(newAlien.body.y >= game.world.height)
-                {
-                    newAlien.destroy();  
-                    console.log("alien down!!");
-                    scores -= 1;      
-                }
-            }); 
-            //check if scores%50==0 drops a life ball
-            /*if(scores%50==0)
-            {
-                initLife();
-            }*/
-
-            /*check if lives go < 0
-            if(lives<=0)
-            {
-                endGame(); //GAME OVER
+        // InvideScene update
+        if(playing===13){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            shipBody.y = game.input.y || game.world.height-80;
+            game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+            game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+            game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+            if(alienPlanetHealth<=0 && bossHealth.width<=0){
+                PatrolScene.initialize();
             }
-
-        }*/
+        }
     }
 
 </script>
