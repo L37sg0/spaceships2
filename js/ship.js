@@ -47,12 +47,13 @@ var Ship = {
         shipBullets.destroy();
         shipTimer.stop();
         shipSpeedTimer.stop();
+        EndGameScene.initialize();
         //StartScene.initializeChooseShip();
     },
     shoot : function(){
         shipBullet = shipBullets.getFirstExists(false);
         if(shipBullet)
-        {   //shoot.play();
+        {   shoot.play();
             shipBulletX = shipBody.x;
             shipBulletY = shipBody.y-shipBody.height/2;
             shipBullet.reset(shipBulletX, shipBulletY);

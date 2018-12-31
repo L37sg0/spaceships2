@@ -63,8 +63,8 @@ var GaugePlanets = {
         });
     },
     update      : function(arg){
-        this.arg = arg;
-        playerplanets += this.arg;
+        //this.arg = arg;
+        playerplanets += arg;
         planetsText.setText('Planets: '+playerplanets);
     },
     setnull     : function(){

@@ -54,7 +54,7 @@ var Boss = {
     shoot : function(){
         bossBullet = bossBullets.getFirstExists(false);
         if(bossBullet)
-        {   //shoot.play();
+        {   shoot.play();
             bossBulleX = bossBody.x;
             bossBulleY = bossBody.y+bossBody.height/2;
             bossBullet.reset(bossBulleX, bossBulleY);

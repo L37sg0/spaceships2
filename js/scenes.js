@@ -25,7 +25,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
         ship1Image.scale.setTo(ship1Text.width/2/ship1Image.width, ship1Text.height/ship1Image.height);
         ship1Image.anchor.set(0.5);
 
-        ship2Text = game.add.text(game.world.width/2, 245, this.ship2_text,{
+        ship2Text = game.add.text(game.world.width/2, 250, this.ship2_text,{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "left",
@@ -35,11 +35,11 @@ var StartScene = {// This is the starting scene of the game. It's an object
         ship2Text.inputEnabled = true;
         ship2Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship2', 'energy':30, 'shoot':'bullet2', 'damage':2, 'speed':1.6}, this);
         ship2Text.events.onInputUp.add(StartScene.initializeChooseType, this);
-        ship2Image = game.add.sprite(50, 245, 'ship2');
+        ship2Image = game.add.sprite(50, 250, 'ship2');
         ship2Image.scale.setTo(ship2Text.width/2/ship2Image.width, ship2Text.height/ship2Image.height);
         ship2Image.anchor.set(0.5);
 
-        ship3Text = game.add.text(game.world.width/2, 335, this.ship3_text,{
+        ship3Text = game.add.text(game.world.width/2, 345, this.ship3_text,{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "left",
@@ -49,7 +49,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
         ship3Text.inputEnabled = true;
         ship3Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship3', 'energy':20, 'shoot':'bullet3', 'damage':3, 'speed':2.4}, this);
         ship3Text.events.onInputUp.add(StartScene.initializeChooseType, this);
-        ship3Image = game.add.sprite(50, 335, 'ship3');
+        ship3Image = game.add.sprite(50, 345, 'ship3');
         ship3Image.scale.setTo(ship3Text.width/2/ship3Image.width, ship3Text.height/ship3Image.height);
         ship3Image.anchor.set(0.5);
     },
@@ -76,8 +76,10 @@ var StartScene = {// This is the starting scene of the game. It's an object
         FightForPlanetText.events.onInputDown.add(FightForPlanetScene.initialize, this);
         //FightForPlanetText.events.onInputUp.add(StartScene.initializeChooseType, this);
         FightForPlanetImage = game.add.sprite(50, 145, 'planet1');
-        FightForPlanetImage.scale.setTo(FightForPlanetText.width/2/FightForPlanetImage.width, FightForPlanetText.height/FightForPlanetImage.height);
+        FightForPlanetImage.scale.setTo(50/FightForPlanetImage.width, 50/FightForPlanetImage.height);
         FightForPlanetImage.anchor.set(0.5);
+        FightForPlanetImage.inputEnabled = true;
+        FightForPlanetImage.events.onInputDown.add(FightForPlanetScene.initialize, this);
 
         PatrolText = game.add.text(game.world.width/2, 215, 'Patrol around',{
             font: "15px Arial",
@@ -90,8 +92,10 @@ var StartScene = {// This is the starting scene of the game. It's an object
         PatrolText.events.onInputDown.add(PatrolScene.initialize, this);
         //PatrolText.events.onInputUp.add(StartScene.initializeChooseType, this);
         PatrolImage = game.add.sprite(50, 215, 'alien');
-        PatrolImage.scale.setTo(PatrolText.width/2/PatrolImage.width, PatrolText.height/PatrolImage.height);
+        PatrolImage.scale.setTo(50/PatrolImage.width, 50/PatrolImage.height);
         PatrolImage.anchor.set(0.5);
+        PatrolImage.inputEnabled = true;
+        PatrolImage.events.onInputDown.add(PatrolScene.initialize, this);
     },
 
     closeTypeMenu : function(){
@@ -105,7 +109,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
 
     initializeChooseShip : function(){// Method of the object StartScene
         initBackground(this.background_image);// Here the background is initialized with the given image
-        //StartScene.nullGame();
+        playing = 0;
         titleText = game.add.text(game.world.width/2, 50, this.title_text,{ 
             font: "30px Arial",
             fill: "#e5e5e5",
@@ -195,6 +199,27 @@ var InvideScene = {
         //Aliens.initialize();
         Boss.initialize();
     }
+}
+
+var EndGameScene = {
+    initialize  :   function(){
+        GaugeDistance.setnull();
+        GaugeInviders.setnull();
+        GaugePlanets.setnull();
+        if(aliens){
+            Aliens.delete();
+        }
+        if(bossBody){
+            Boss.setnull();
+        }
+        if(playerPlanetBody){
+            PlayerPlanet.setnull();
+        }
+        if(alienPlanetBody){
+            AlienPlanet.setnull();
+        }
+        StartScene.initializeChooseShip();
+    },
 }
 
 

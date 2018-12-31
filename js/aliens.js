@@ -28,7 +28,7 @@ var Aliens = {
     },
     newWave : function(){//Creates new wave of aliens
         //First checks if an alien object leave the screen and destroy it
-        //console.log(aliens.length);
+        console.log(aliens.length);
         aliens.forEach(function(alien)
         {
             if(alien.body.y >= game.world.height)
@@ -45,7 +45,7 @@ var Aliens = {
                 if(will){
                     let alienX = (c*(Aliens.alienInfo.width+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.left;
                     let alienY = (r*(Aliens.alienInfo.height+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.top;
-        
+                    
                     alien = aliens.create(alienX, alienY, "alien");  
                     alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
                     alien.anchor.set(0.5, 0.5);
@@ -55,7 +55,7 @@ var Aliens = {
         }
     },
     delete  :  function(){
-        aliens.destroy();
+        //aliens.destroy();
         aliensTimer.stop();
     }
 }
