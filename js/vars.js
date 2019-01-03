@@ -1,14 +1,9 @@
     var game;  
-    var ship;  
     var boom;
     var shoot;
     var soundtrack;
+    level = 100;
 
-    var bosses = [
-        ["boss" , 50 , 20, 1000],
-        ["boss2", 100, 30,  1300],
-        ["boss3", 150, 40,  1700],
-        ["boss4", 200, 60,  2000]];
     var assets = [
         {"name":"ship1","src":"img/ship1.png"},
         {"name":"ship2","src":"img/ship2.png"},
@@ -41,28 +36,10 @@
         {"name":"red","src":"img/red.png"},
         {"name":"life","src":"img/life.png"}
 ];
-    planets = ['planet1', 'planet2', 'planet3', 'planet4', 'planet5', 'planet6', 'planet7', 'planet8', 'planet9', 'planet10', ]
-
-
-    var shipBullets;
-    var bossBullets;
-    var shipBody;
-    var bossBody;
-    var freeAliens;
-    var freeAliensText;
-    var distanceText;
-    var planetsText;
-    var playerPlanetBody;
-    var alienPlanetBody;
 
     var lb;
     var highscores;
     var table;
-
-
-    var aliens;
-    var alienInfo;
-
 
     var col;
     var row;

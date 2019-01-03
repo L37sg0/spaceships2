@@ -3,9 +3,9 @@ var StartScene = {// This is the starting scene of the game. It's an object
     title_text          : 'Space Ships', // The game title text
     subtitle1_text       : 'Choose your ship:', // The subtitle text
     subtitle2_text       : 'Choose game type:', // The second subtitle text
-    ship1_text          : 'Shuttle:\nEnergy=80\nDamage=1\nSpeed=0.8lyps', //Next 3 are the names of the spaceships
-    ship2_text          : 'Lunar:\nEnergy=30\nDamage=2\nSpeed=1.6lyps',   // with their energy and damage they deal
-    ship3_text          : 'Shadow:\nEnergy=20\nDamage=3\nSpeed=2.4lyps',  // and speed in lyps(light years per second)
+    ship1_text          : 'Shuttle:\nEnergy=4\nDamage=1\nSpeed=1.1lyps', //Next 3 are the names of the spaceships
+    ship2_text          : 'Lunar:\nEnergy=3\nDamage=1\nSpeed=1.6lyps',   // with their energy and damage they deal
+    ship3_text          : 'Shadow:\nEnergy=2\nDamage=1\nSpeed=2.4lyps',  // and speed in lyps(light years per second)
     
     //ship_image : 'ship2',
 
@@ -19,11 +19,14 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship1Text.anchor.set(0.5);
         ship1Text.inputEnabled = true;
-        ship1Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship1', 'energy':80, 'shoot':'bullet1', 'damage':1, 'speed':0.8}, this);
+        ship1Text.events.onInputDown.add(Ship.initialize, shipConstructors[0], this);
         ship1Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship1Image = game.add.sprite(50, 155, 'ship1');
         ship1Image.scale.setTo(ship1Text.width/2/ship1Image.width, ship1Text.height/ship1Image.height);
         ship1Image.anchor.set(0.5);
+        ship1Image.inputEnabled = true;
+        ship1Image.events.onInputDown.add(Ship.initialize, shipConstructors[0], this);
+        ship1Image.events.onInputUp.add(StartScene.initializeChooseType, this);
 
         ship2Text = game.add.text(game.world.width/2, 250, this.ship2_text,{
             font: "15px Arial",
@@ -33,11 +36,14 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship2Text.anchor.set(0.5);
         ship2Text.inputEnabled = true;
-        ship2Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship2', 'energy':30, 'shoot':'bullet2', 'damage':2, 'speed':1.6}, this);
+        ship2Text.events.onInputDown.add(Ship.initialize, shipConstructors[1], this);
         ship2Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship2Image = game.add.sprite(50, 250, 'ship2');
         ship2Image.scale.setTo(ship2Text.width/2/ship2Image.width, ship2Text.height/ship2Image.height);
         ship2Image.anchor.set(0.5);
+        ship2Image.inputEnabled = true;
+        ship2Image.events.onInputDown.add(Ship.initialize, shipConstructors[1], this);
+        ship2Image.events.onInputUp.add(StartScene.initializeChooseType, this);
 
         ship3Text = game.add.text(game.world.width/2, 345, this.ship3_text,{
             font: "15px Arial",
@@ -47,11 +53,14 @@ var StartScene = {// This is the starting scene of the game. It's an object
         });
         ship3Text.anchor.set(0.5);
         ship3Text.inputEnabled = true;
-        ship3Text.events.onInputDown.add(Ship.initialize, {'sprite_image':'ship3', 'energy':20, 'shoot':'bullet3', 'damage':3, 'speed':2.4}, this);
+        ship3Text.events.onInputDown.add(Ship.initialize, shipConstructors[2], this);
         ship3Text.events.onInputUp.add(StartScene.initializeChooseType, this);
         ship3Image = game.add.sprite(50, 345, 'ship3');
         ship3Image.scale.setTo(ship3Text.width/2/ship3Image.width, ship3Text.height/ship3Image.height);
         ship3Image.anchor.set(0.5);
+        ship3Image.inputEnabled = true;
+        ship3Image.events.onInputDown.add(Ship.initialize, shipConstructors[2], this);
+        ship3Image.events.onInputUp.add(StartScene.initializeChooseType, this);
     },
 
     closeShipMenu : function(){
@@ -166,12 +175,18 @@ var PatrolScene = {
         console.log('patrol scene');
         playing = 11;
         StartScene.closeTypeMenu();
-        GaugeInviders.initialize();
+        //GaugeInviders.initialize();
         GaugeDistance.initialize();
-        GaugePlanets.initialize();
+        //GaugePlanets.initialize();
+        GaugeLevel.initialize();
+        GaugeScores.initialize();
         shipTimer.start();
         shipSpeedTimer.start();
         Aliens.initialize();
+        //Boss.initialize(); 
+        sceneTimer = game.time.create(false);
+        sceneTimer.loop(60000, Boss.initialize);
+        sceneTimer.start();
     }
 }
 var DefendScene = {
@@ -179,7 +194,7 @@ var DefendScene = {
     initialize  : function(){
         console.log('defend scene');
         //playing = 12;
-        GaugeInviders.initialize();
+        //GaugeInviders.initialize();
         GaugeDistance.initialize();
         //GaugePlanets.initialize();
         PlayerPlanet.initialize();
@@ -192,20 +207,21 @@ var InvideScene = {
     initialize  : function(){
         console.log('invide scene');
         //playing = 13;
-        GaugeInviders.initialize();
+        //GaugeInviders.initialize();
         GaugeDistance.initialize();
         //GaugePlanets.initialize();
         AlienPlanet.initialize();
         //Aliens.initialize();
-        Boss.initialize();
+        //Boss.initialize();
     }
 }
 
 var EndGameScene = {
     initialize  :   function(){
         GaugeDistance.setnull();
-        GaugeInviders.setnull();
-        GaugePlanets.setnull();
+        //GaugeInviders.setnull();
+        //GaugePlanets.setnull();
+        GaugeLevel.setnull();
         if(aliens){
             Aliens.delete();
         }

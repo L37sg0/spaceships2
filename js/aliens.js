@@ -1,5 +1,7 @@
 //Aliens
 
+var aliens;
+
 var Aliens = {
     alienSpeed : 200,
 
@@ -28,19 +30,22 @@ var Aliens = {
     },
     newWave : function(){//Creates new wave of aliens
         //First checks if an alien object leave the screen and destroy it
-        console.log(aliens.length);
+        //console.log(aliens.length);
         aliens.forEach(function(alien)
         {
             if(alien.body.y >= game.world.height)
-            {   GaugeInviders.update();
+            {   //GaugeInviders.update();
                 alien.destroy();  
+                GaugeScores.update(-Math.floor(level/3));
             }
         }); // And here the wave is created
-        let row = game.rnd.integerInRange(2,3);
+        let row = game.rnd.integerInRange(1,5);
         for(c=0;c<col;c++)
         {
             for(r=0;r<row;r++)
             {
+
+                alienDamage = Math.floor(level/3);//level;
                 let will = game.rnd.integerInRange(0,1);
                 if(will){
                     let alienX = (c*(Aliens.alienInfo.width+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.left;
@@ -49,6 +54,7 @@ var Aliens = {
                     alien = aliens.create(alienX, alienY, "alien");  
                     alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
                     alien.anchor.set(0.5, 0.5);
+                    alien.body.bounce.set(1);
                     alien.body.velocity.set(0, Aliens.alienSpeed);
                 }
             }

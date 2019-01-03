@@ -23,20 +23,22 @@
     {
         bullet.kill();
         explode(alien);
+        GaugeScores.update(Math.floor(level/3));
     }
 
     function alienHitShip(shipBody, alien)
     {
-        shipEnergy.width -= 1; 
+        //shipEnergy.width -= alienDamage; 
         
-        if(shipEnergy.width <= 0){
+        shipEnergy.text -= alienDamage;
+        if(shipEnergy.text <= 0){//shipEnergy.width <= 0){
             Ship.delete();
         }
         explode(alien);
     }
     function alienHitPlanet(playerPlanetBody, alien)
     {
-        playerPlanetText.setText(playerPlanetText.text - 3);
+        playerPlanetText.setText(playerPlanetText.text - alienDamage);
         explode(alien);
         if(playerPlanetText.text <= 0){
             PlayerPlanet.delete();
@@ -48,26 +50,30 @@
         alienPlanetText.setText(alienPlanetText.text - shipDamage);
         if(alienPlanetText.text <= 0){
             AlienPlanet.delete();
+            GaugeScores.update(50*level);
         }
     }
 
     function bulletHitBoss(boss, bullet)
     {   
-        if(bossHealth.width <= 0)
+        bossHealth.text -= shipDamage;//.width -= shipDamage;
+        if(bossHealth.text <= 0)//bossHealth.width <= 0)
         {
             Boss.delete();
+            GaugeScores.update(20*level);
         }
-        bossHealth.width -= shipDamage;
+        
         bullet.kill();
     }
 
 
     function bulletHitShip(ship, bullet)
     {
-        if(shipEnergy.width <= 0){
+        shipEnergy.text -= bossDamage;
+        if(shipEnergy.text <= 0){//shipEnergy.width <= 0){
             Ship.delete();
         }
-        shipEnergy.width -= bossDamage;
+        //shipEnergy.width -= bossDamage;
         bullet.kill();
         console.log('ship hitted')
     }
@@ -79,6 +85,20 @@
             PlayerPlanet.delete();
         }
     }
+
+    function ShipHitBoss(ship, boss){
+        bossHealth.text -= shipDamage;//.width -= shipDamage;
+        if(bossHealth.text <= 0){//bossHealth.width <= 0)
+            Boss.delete();
+            GaugeScores.update(20*level);
+        }
+        shipEnergy.text -= bossDamage;
+        if(shipEnergy.text <= 0){//shipEnergy.width <= 0){
+            Ship.delete();
+        }
+        console.log('shiphitboss');
+    }
+
 
     function explode(obj)
     {
