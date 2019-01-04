@@ -5,6 +5,7 @@ var distanceText;
 var planetsText;
 var levelText;
 var scoresText;
+var timeText;
 
 var GaugeInviders = {
     initialize  : function(){
@@ -126,5 +127,34 @@ var GaugeScores = {
     },
     setnull     : function(){
         scoresText.destroy();
+    }
+}
+var GaugeBoss = {
+    initialize  : function(){
+        if(timeText){
+            GaugeBoss.setnull();
+        }
+        time = 60;
+        timeText = game.add.text(10, 100, 'New Boss in: '+time,{
+            font: "15px Arial",
+            fill: "#e5e5e5",
+            align: "center",
+            backgroundColor: "#2582583D"
+        });
+        timeTimer = game.time.create(false);
+        timeTimer.loop(1000, GaugeBoss.update);
+        timeTimer.start();
+    },
+    update      : function(){
+        if(time <= 0){
+            Boss.initialize();
+            GaugeBoss.initialize();
+        }
+        time -= 1;
+        timeText.setText('New Boss in: '+time);
+    },
+    setnull     : function(){
+        timeText.destroy();
+        timeTimer.stop();
     }
 }

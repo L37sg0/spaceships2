@@ -184,9 +184,7 @@ var PatrolScene = {
         shipSpeedTimer.start();
         Aliens.initialize();
         //Boss.initialize(); 
-        sceneTimer = game.time.create(false);
-        sceneTimer.loop(60000, Boss.initialize);
-        sceneTimer.start();
+        GaugeBoss.initialize();
     }
 }
 var DefendScene = {
@@ -222,6 +220,7 @@ var EndGameScene = {
         //GaugeInviders.setnull();
         //GaugePlanets.setnull();
         GaugeLevel.setnull();
+        GaugeBoss.setnull();
         if(aliens){
             Aliens.delete();
         }
@@ -236,6 +235,12 @@ var EndGameScene = {
         }
         StartScene.initializeChooseShip();
     },
+}
+
+var LBScene = {
+    initialize  : function(){
+
+    }
 }
 
 
