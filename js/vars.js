@@ -2,7 +2,7 @@
     var boom;
     var shoot;
     var soundtrack;
-    level = 100;
+    level = 1;
 
     var assets = [
         {"name":"ship1","src":"img/ship1.png"},

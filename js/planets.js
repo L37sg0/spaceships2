@@ -41,7 +41,7 @@ var AlienPlanet = {
         alienPlanetText.kill();
     }
 }
-
+/*
 var PlayerPlanet = {
 
     initialize : function(){
@@ -79,4 +79,4 @@ var PlayerPlanet = {
         playerPlanetBody.kill();
         playerPlanetText.kill();
     }
-}
+}*/

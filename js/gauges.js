@@ -7,6 +7,7 @@ var levelText;
 var scoresText;
 var timeText;
 
+/*
 var GaugeInviders = {
     initialize  : function(){
         if(freeAliensText){
@@ -30,7 +31,7 @@ var GaugeInviders = {
     setnull     : function(){
         freeAliensText.destroy();
     }
-}
+}*/
 
 var GaugeDistance = {
     initialize  : function(){
@@ -47,7 +48,8 @@ var GaugeDistance = {
     },
     update      : function(){
         if(distance<=0){
-            InvideScene.initialize();
+            AlienPlanet.initialize();
+            GaugeDistance.initialize();
         }
         distance -= 1;
         distanceText.setText('New Planet: '+distance+' ly.');
@@ -56,7 +58,7 @@ var GaugeDistance = {
         distanceText.destroy();
     }
 }
-
+/*
 var GaugePlanets = {
     initialize  : function(){
         if(planetsText){
@@ -78,7 +80,7 @@ var GaugePlanets = {
     setnull     : function(){
         planetsText.destroy();
     }
-}
+}*/
 var GaugeLevel = {
     initialize  : function(){
         if(levelText){
@@ -98,7 +100,7 @@ var GaugeLevel = {
             level = 100;
         }
         levelText.setText('Level: '+level);
-        //Ship.update();
+        EndGameScene.initialize();
     },
     setnull     : function(){
         levelText.destroy();
@@ -109,7 +111,7 @@ var GaugeScores = {
         if(scoresText){
             scoresText.destroy();
         }
-        scoresText = game.add.text(10, game.world.height-30, 'Scores: '+scores,{
+        scoresText = game.add.text(10, game.world.height-30, 'Scores: '+Math.floor(scores),{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -119,11 +121,11 @@ var GaugeScores = {
     update      : function(arg){
         this.arg = arg;
         scores += this.arg;
-        if(scores >= 10*level){
+        if(scores >= 1000*level){
             console.log(level);
             GaugeLevel.update();
         }
-        scoresText.setText('Scores: '+scores);
+        scoresText.setText('Scores: '+Math.floor(scores));
     },
     setnull     : function(){
         scoresText.destroy();

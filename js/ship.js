@@ -80,8 +80,7 @@ var Ship = {
         shipBullets.destroy();
         shipTimer.stop();
         shipSpeedTimer.stop();
-        EndGameScene.initialize();
-        //StartScene.initializeChooseShip();
+        GameScene.end();
     },
     shoot : function(){
         shipBullet1 = shipBullets.getFirstExists(false);
@@ -113,7 +112,7 @@ var Ship = {
             shipBullet3.body.velocity.y -= Ship.shootSpeed;
         }
     },
-    update      : function(){
+    /*update      : function(){
         //shipTimer.stop();
         shipTimer.loop(Ship.shootTime/this.speed-level/2, Ship.shoot);
         shipTimer.start();
@@ -121,7 +120,7 @@ var Ship = {
         shipDamage += 1;
         console.log('energy: '+shipEnergy.text, 'damage: '+shipDamage);
 
-    },
+    },*/
     setnull     : function(){
         shipBody.kill();
         shipEnergy.kill();

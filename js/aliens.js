@@ -36,7 +36,7 @@ var Aliens = {
             if(alien.body.y >= game.world.height)
             {   //GaugeInviders.update();
                 alien.destroy();  
-                GaugeScores.update(-Math.floor(level/3));
+                GaugeScores.update(-level);
             }
         }); // And here the wave is created
         let row = game.rnd.integerInRange(1,5);
@@ -45,7 +45,7 @@ var Aliens = {
             for(r=0;r<row;r++)
             {
 
-                alienDamage = Math.floor(level/3);//level;
+                alienDamage = level;
                 let will = game.rnd.integerInRange(0,1);
                 if(will){
                     let alienX = (c*(Aliens.alienInfo.width+Aliens.alienInfo.padding))+Aliens.alienInfo.offset.left;

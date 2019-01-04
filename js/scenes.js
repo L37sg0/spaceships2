@@ -1,3 +1,47 @@
+var ChoosseShipImage;
+var ChooseShipImage;
+
+var GameSceneText;
+var GameSceneImage;
+
+var UserMenu = {
+    open  :   function(){
+
+        Background.initialize('background1');
+        ChooseShipText = game.add.text(game.world.width/2, 155, 'Ships',{
+            font: "15px Arial",
+            fill: "#e5e5e5",
+            align: "left",
+            backgroundColor: "#2582583D"
+        });
+        ChooseShipText.anchor.set(0.5);
+        ChooseShipText.inputEnabled = true;
+        ChooseShipText.events.onInputDown.add(StartScene.openShipMenu, this);
+        //ChooseShipText.events.onInputUp.add(StartScene.initializeChooseType, this);
+        ChooseShipImage = game.add.sprite(50, 155, 'ship1');
+        ChooseShipImage.scale.setTo(50/ChooseShipImage.width, 50/ChooseShipImage.height);
+        ChooseShipImage.anchor.set(0.5);
+        ChooseShipImage.inputEnabled = true;
+        ChooseShipImage.events.onInputDown.add(StartScene.openShipMenu, this);
+
+        GameSceneText = game.add.text(game.world.width/2, 215, 'Play',{
+            font: "15px Arial",
+            fill: "#e5e5e5",
+            align: "left",
+            backgroundColor: "#2582583D"
+        });
+        GameSceneText.anchor.set(0.5);
+        GameSceneText.inputEnabled = true;
+        GameSceneText.events.onInputDown.add(GameScene.initialize, this);
+        //GameSceneText.events.onInputUp.add(StartScene.initializeChooseType, this);
+        GameSceneImage = game.add.sprite(50, 215, 'alien');
+        GameSceneImage.scale.setTo(50/GameSceneImage.width, 50/GameSceneImage.height);
+        GameSceneImage.anchor.set(0.5);
+        GameSceneImage.inputEnabled = true;
+        GameSceneImage.events.onInputDown.add(GameScene.initialize, this);
+    },
+}
+
 var StartScene = {// This is the starting scene of the game. It's an object
     background_image    : 'background1', // The background image for the scene
     title_text          : 'Space Ships', // The game title text
@@ -73,7 +117,7 @@ var StartScene = {// This is the starting scene of the game. It's an object
     },
 
     openTypeMenu : function(){
-        // Next are some text objects for game type names and a sprites showing the level background
+        /*/ Next are some text objects for game type names and a sprites showing the level background
         FightForPlanetText = game.add.text(game.world.width/2, 145, 'Fight for Planet',{
             font: "15px Arial",
             fill: "#e5e5e5",
@@ -88,36 +132,37 @@ var StartScene = {// This is the starting scene of the game. It's an object
         FightForPlanetImage.scale.setTo(50/FightForPlanetImage.width, 50/FightForPlanetImage.height);
         FightForPlanetImage.anchor.set(0.5);
         FightForPlanetImage.inputEnabled = true;
-        FightForPlanetImage.events.onInputDown.add(FightForPlanetScene.initialize, this);
+        FightForPlanetImage.events.onInputDown.add(FightForPlanetScene.initialize, this);*/
 
-        PatrolText = game.add.text(game.world.width/2, 215, 'Patrol around',{
+        GameSceneText = game.add.text(game.world.width/2, 215, 'Play',{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "left",
             backgroundColor: "#2582583D"
         });
-        PatrolText.anchor.set(0.5);
-        PatrolText.inputEnabled = true;
-        PatrolText.events.onInputDown.add(PatrolScene.initialize, this);
-        //PatrolText.events.onInputUp.add(StartScene.initializeChooseType, this);
-        PatrolImage = game.add.sprite(50, 215, 'alien');
-        PatrolImage.scale.setTo(50/PatrolImage.width, 50/PatrolImage.height);
-        PatrolImage.anchor.set(0.5);
-        PatrolImage.inputEnabled = true;
-        PatrolImage.events.onInputDown.add(PatrolScene.initialize, this);
+        GameSceneText.anchor.set(0.5);
+        GameSceneText.inputEnabled = true;
+        GameSceneText.events.onInputDown.add(GameScene.initialize, this);
+        //GameSceneText.events.onInputUp.add(StartScene.initializeChooseType, this);
+        GameSceneImage = game.add.sprite(50, 215, 'alien');
+        GameSceneImage.scale.setTo(50/GameSceneImage.width, 50/GameSceneImage.height);
+        GameSceneImage.anchor.set(0.5);
+        GameSceneImage.inputEnabled = true;
+        GameSceneImage.events.onInputDown.add(GameScene.initialize, this);
     },
 
     closeTypeMenu : function(){
         titleText.destroy();
         subtitleText.destroy();
-        FightForPlanetText.destroy();
-        FightForPlanetImage.destroy();
-        PatrolText.destroy();
-        PatrolImage.destroy();
+        //FightForPlanetText.destroy();
+        //FightForPlanetImage.destroy();
+        GameSceneText.destroy();
+        GameSceneImage.destroy();
     },
 
     initializeChooseShip : function(){// Method of the object StartScene
-        initBackground(this.background_image);// Here the background is initialized with the given image
+        Background.initialize(this.background_image);
+        //initBackground(this.background_image);// Here the background is initialized with the given image
         playing = 0;
         titleText = game.add.text(game.world.width/2, 50, this.title_text,{ 
             font: "30px Arial",
@@ -154,6 +199,41 @@ var StartScene = {// This is the starting scene of the game. It's an object
 
 }
 
+var GameScene = {
+
+    initialize  : function(){
+        console.log('game scene');
+        playing = 11;
+        scores = 0;
+        StartScene.closeTypeMenu();
+        GaugeDistance.initialize();
+        GaugeLevel.initialize();
+        GaugeScores.initialize();
+        shipTimer.start();
+        shipSpeedTimer.start();
+        Aliens.initialize();
+        GaugeBoss.initialize();
+    },
+    end  :   function(){
+        GaugeDistance.setnull();
+        GaugeLevel.setnull();
+        GaugeBoss.setnull();
+        if(aliens){
+            Aliens.delete();
+        }
+        if(bossBody){
+            Boss.setnull();
+        }
+        if(playerPlanetBody){
+            PlayerPlanet.setnull();
+        }
+        if(alienPlanetBody){
+            AlienPlanet.setnull();
+        }
+        StartScene.initializeChooseShip();
+    }
+}
+/*
 var FightForPlanetScene = {
     time        : 60,
 
@@ -168,25 +248,8 @@ var FightForPlanetScene = {
         shipTimer.start();
         //Aliens.initialize();
     }
-}
-var PatrolScene = {
-
-    initialize  : function(){
-        console.log('patrol scene');
-        playing = 11;
-        StartScene.closeTypeMenu();
-        //GaugeInviders.initialize();
-        GaugeDistance.initialize();
-        //GaugePlanets.initialize();
-        GaugeLevel.initialize();
-        GaugeScores.initialize();
-        shipTimer.start();
-        shipSpeedTimer.start();
-        Aliens.initialize();
-        //Boss.initialize(); 
-        GaugeBoss.initialize();
-    }
-}
+}*/
+/*
 var DefendScene = {
 
     initialize  : function(){
@@ -235,7 +298,7 @@ var EndGameScene = {
         }
         StartScene.initializeChooseShip();
     },
-}
+}*/
 
 var LBScene = {
     initialize  : function(){

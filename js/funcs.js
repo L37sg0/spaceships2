@@ -1,29 +1,10 @@
-// Functionality for live increase
-    function initLife()
-    {
-        life = game.add.sprite(game.world.width*0.5, 0, "life");      
-        life.scale.setTo(20/life.width, 20/life.height);
-        game.physics.enable(life, Phaser.Physics.ARCADE);
-        life.enableBody = true;
-        //life.anchor.set(0.5);
-        life.body.velocity.set(0, 200);
-    }
-    
-    function initBackground(background_image)
-    {
-        back = game.add.tileSprite(0, 0, game.world.width, game.world.height,  background_image);
-    }
-
-    function changeBackground(background_image){
-        this.background_image = background_image;
-        back.loadTexture(this.background_image);
-    }
+// Some game functions
 
     function bulletHitAlien(bullet, alien)
     {
         bullet.kill();
         explode(alien);
-        GaugeScores.update(Math.floor(level/3));
+        GaugeScores.update(level);
     }
 
     function alienHitShip(shipBody, alien)
@@ -35,14 +16,6 @@
             Ship.delete();
         }
         explode(alien);
-    }
-    function alienHitPlanet(playerPlanetBody, alien)
-    {
-        playerPlanetText.setText(playerPlanetText.text - alienDamage);
-        explode(alien);
-        if(playerPlanetText.text <= 0){
-            PlayerPlanet.delete();
-        }
     }
 
     function bulletHitAlienPlanet(alienPlanetBody, bullet){
@@ -66,7 +39,6 @@
         bullet.kill();
     }
 
-
     function bulletHitShip(ship, bullet)
     {
         shipEnergy.text -= bossDamage;
@@ -76,14 +48,6 @@
         //shipEnergy.width -= bossDamage;
         bullet.kill();
         console.log('ship hitted')
-    }
-    
-    function bulletHitPlayerPlanet(playerPlanetBody, bullet){
-        bullet.kill();
-        playerPlanetText.setText(playerPlanetText.text - bossDamage);
-        if(playerPlanetText.text <= 0){
-            PlayerPlanet.delete();
-        }
     }
 
     function ShipHitBoss(ship, boss){
@@ -99,7 +63,6 @@
         console.log('shiphitboss');
     }
 
-
     function explode(obj)
     {
             boom.play();
@@ -112,3 +75,21 @@
             }, this);
             killTween.start();
     }
+    /*
+    function alienHitPlanet(playerPlanetBody, alien)
+    {
+        playerPlanetText.setText(playerPlanetText.text - alienDamage);
+        explode(alien);
+        if(playerPlanetText.text <= 0){
+            PlayerPlanet.delete();
+        }
+    }*/
+
+    /*
+    function bulletHitPlayerPlanet(playerPlanetBody, bullet){
+        bullet.kill();
+        playerPlanetText.setText(playerPlanetText.text - bossDamage);
+        if(playerPlanetText.text <= 0){
+            PlayerPlanet.delete();
+        }
+    }*/
