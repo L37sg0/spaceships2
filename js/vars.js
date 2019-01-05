@@ -3,6 +3,7 @@
     var shoot;
     var soundtrack;
     level = 1;
+    playerShip = 0;
 
     var assets = [
         {"name":"ship1","src":"img/ship1.png"},
@@ -33,7 +34,7 @@
         {"name":"planet8","src":"img/planet8.png"},
         {"name":"planet9","src":"img/planet9.png"},
         {"name":"planet10","src":"img/planet10.png"},
-        {"name":"red","src":"img/red.png"},
+        {"name":"hangar","src":"img/hangar.jpg"},
         {"name":"life","src":"img/life.png"}
 ];
 

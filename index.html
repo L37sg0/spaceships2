@@ -15,6 +15,10 @@
     <script src="js/gauges.js"></script>
     <script src="js/background.js"></script>
     <script src="js/powerups.js"></script>
+    <script src="js/menus/usermenu.js"></script>
+    <script src="js/menus/frame.js"></script>
+    <script src="js/menus/infomenu.js"></script>
+    <script src="js/menus/hangarmenu.js"></script>
     <style>
         body {
             margin: 0;
@@ -114,27 +118,17 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         //create game objects
-        UserMenu.open();  
+        //Background.initialize('background1');
+        Background.initialize('hangar');
+        Frame.open();
+        //UserMenu.open();  
     }
 
     function update ()
     {        
         //set tiling background speed
-        back.tilePosition.y += 2;
-
-        // Fight For Planet Scene update
-        if(playing===10){
-            shipBody.x = game.input.x || game.world.width*0.5;
-            shipBody.y = game.input.y || game.world.height-80;
-            
-            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
-            game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
-            game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
-            game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
-            game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
-        } 
-
-        // PatrollScene update
+        Background.update(backgroundSpeed);
+        // GameScene update
         if(playing===11){
             shipBody.x = game.input.x || game.world.width*0.5;
             shipBody.y = game.input.y || game.world.height-80;
@@ -163,6 +157,19 @@
                 game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
             }
         } 
+
+        // Fight For Planet Scene update
+        /*if(playing===10){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            shipBody.y = game.input.y || game.world.height-80;
+            
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+            game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+            game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+            game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
+        } */
+
     }
 
 </script>

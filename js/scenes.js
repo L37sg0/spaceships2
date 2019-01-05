@@ -205,12 +205,13 @@ var GameScene = {
         console.log('game scene');
         playing = 11;
         scores = 0;
-        StartScene.closeTypeMenu();
+        Frame.close();
+        Background.change('background1');
+        backgroundSpeed = level;
+        Ship.initialize(shipConstructors[playerShip]);
         GaugeDistance.initialize();
         GaugeLevel.initialize();
         GaugeScores.initialize();
-        shipTimer.start();
-        shipSpeedTimer.start();
         Aliens.initialize();
         GaugeBoss.initialize();
     },
@@ -230,7 +231,8 @@ var GameScene = {
         if(alienPlanetBody){
             AlienPlanet.setnull();
         }
-        StartScene.initializeChooseShip();
+        Frame.open();
+        //StartScene.initializeChooseShip();
     }
 }
 /*

@@ -13,15 +13,15 @@ var Ship = {
 
     shootSpeed : 500,
 
-    initialize : function(){
+    initialize : function(constructor){
 
         if(shipBody)
         {
             Ship.setnull();
         }
-        shipDamage = this.damage+level;
+        shipDamage = constructor.damage+level;
 
-        shipBody = game.add.sprite(game.world.width*0.5, game.world.height-60, this.sprite_image);        
+        shipBody = game.add.sprite(game.world.width*0.5, game.world.height-60, constructor.sprite_image);        
         shipBody.scale.setTo(40/shipBody.width, 60/shipBody.height);
         game.physics.enable(shipBody, Phaser.Physics.ARCADE);
         
@@ -33,7 +33,7 @@ var Ship = {
         //shipEnergy = game.add.sprite(game.world.width-90, game.world.height-20, 'energy');
         //shipEnergy.scale.setTo(this.energy*level/shipEnergy.width, 10/shipEnergy.height);
 
-        shipEnergy = game.add.text(game.world.width-90, game.world.height-20, this.energy+level,{
+        shipEnergy = game.add.text(game.world.width-90, game.world.height-20, constructor.energy+level,{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -44,7 +44,7 @@ var Ship = {
         shipBullets = game.add.group();
         shipBullets.enableBody = true;
         game.physics.enable(shipBullets, Phaser.Physics.ARCADE);
-        shipBullets.createMultiple(this.gun1, this.shoot);
+        shipBullets.createMultiple(constructor.gun1, constructor.shoot);
         shipBullets.setAll("anchor.x", 0.5);
         shipBullets.setAll("anchor.y", 1);
         shipBullets.setAll("outOfBoundsKill", true);
@@ -53,7 +53,7 @@ var Ship = {
         shipBullets2 = game.add.group();
         shipBullets2.enableBody = true;
         game.physics.enable(shipBullets2, Phaser.Physics.ARCADE);
-        shipBullets2.createMultiple(this.gun2, this.shoot);
+        shipBullets2.createMultiple(constructor.gun2, constructor.shoot);
         shipBullets2.setAll("anchor.x", 0.5);
         shipBullets2.setAll("anchor.y", 1);
         shipBullets2.setAll("outOfBoundsKill", true);
@@ -62,17 +62,22 @@ var Ship = {
         shipBullets3 = game.add.group();
         shipBullets3.enableBody = true;
         game.physics.enable(shipBullets3, Phaser.Physics.ARCADE);
-        shipBullets3.createMultiple(this.gun3, this.shoot);
+        shipBullets3.createMultiple(constructor.gun3, constructor.shoot);
         shipBullets3.setAll("anchor.x", 0.5);
         shipBullets3.setAll("anchor.y", 1);
         shipBullets3.setAll("outOfBoundsKill", true);
         shipBullets3.setAll("checkWorldBounds", true);
         
         shipTimer = game.time.create(false);
-        shipTimer.loop(Ship.shootTime/this.speed, Ship.shoot);
+        shipTimer.loop(Ship.shootTime/(constructor.speed+level/100), Ship.shoot);
+        shipTimer.start();
 
         shipSpeedTimer = game.time.create(false);
-        shipSpeedTimer.loop(1000/this.speed, GaugeDistance.update);
+        shipSpeedTimer.loop((1000+level)/constructor.speed, GaugeDistance.update);
+        shipSpeedTimer.start();
+    },
+    change  :   function(){
+        playerShip = this.arg;
     },
     delete : function(){
         explode(shipBody);
@@ -98,10 +103,10 @@ var Ship = {
         if(shipBullet2)
         {   shoot.play();
             shipBullet2X = shipBody.x-15;
-            shipBulletY = shipBody.y-shipBody.height/2;
+            shipBulletY = shipBody.y+shipBody.height/2;
 
             shipBullet2.reset(shipBullet2X, shipBulletY);
-            shipBullet2.body.velocity.y -= Ship.shootSpeed;
+            shipBullet2.body.velocity.y += Ship.shootSpeed;
         }
         if(shipBullet3)
         {   shoot.play();

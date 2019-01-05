@@ -100,7 +100,9 @@ var GaugeLevel = {
             level = 100;
         }
         levelText.setText('Level: '+level);
-        EndGameScene.initialize();
+        Ship.initialize(shipConstructors[playerShip]);
+        backgroundSpeed = level;
+        //GameScene.end();
     },
     setnull     : function(){
         levelText.destroy();
@@ -121,7 +123,7 @@ var GaugeScores = {
     update      : function(arg){
         this.arg = arg;
         scores += this.arg;
-        if(scores >= 1000*level){
+        if(scores >= 100*level){
             console.log(level);
             GaugeLevel.update();
         }
