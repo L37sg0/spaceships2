@@ -65,12 +65,12 @@
 
     function explode(obj)
     {
-            boom.play();
+            //boom.play();
             obj.loadTexture("explosion", 0);
             let killTween = game.add.tween(obj.scale);
             killTween.to({x: 0, y: 0}, 200, Phaser.Easing.Linear.None);
             killTween.onComplete.addOnce(function(){
-                obj.destroy();
+                obj.kill();
                 obj = 0;
             }, this);
             killTween.start();

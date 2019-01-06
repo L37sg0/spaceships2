@@ -3,6 +3,7 @@
 var HangarMenu = {
     open    :   function(){
         UserMenu.close();
+
         ship1Text = game.add.text(game.world.width/2, 155, 'Shuttle:\nEnergy=4\nDamage=1\nSpeed=1.1lyps',{
             font: "15px Arial",
             fill: "#e5e5e5",
@@ -54,7 +55,7 @@ var HangarMenu = {
         ship3Image.events.onInputDown.add(Ship.change, {'arg':2}, this);
         //ship3Image.events.onInputUp.add(StartScene.initializeChooseType, this);
         
-        backbutton =  game.add.text(game.world.width/2, 440, 'Back',{
+        backbutton =  game.add.text(50, 440, 'Back',{
             font: "18px Arial",
             fill: "#e5e5e5",
             align: "left",
@@ -63,6 +64,8 @@ var HangarMenu = {
         backbutton.anchor.set(0.5);
         backbutton.inputEnabled = true;
         backbutton.events.onInputDown.add(HangarMenu.close, this);
+
+        Ship.initialize(shipConstructors[playerShip]);
     },
     close   : function(){
         ship1Text.destroy();
@@ -72,6 +75,8 @@ var HangarMenu = {
         ship3Text.destroy();
         ship3Image.destroy();
         backbutton.destroy();
+        Ship.setnull();
+
         UserMenu.open();
     }
 }

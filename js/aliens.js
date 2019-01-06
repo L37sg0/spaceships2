@@ -55,7 +55,7 @@ var Aliens = {
                     alien.scale.setTo(Aliens.alienInfo.width/alien.width, Aliens.alienInfo.height/alien.height);
                     alien.anchor.set(0.5, 0.5);
                     alien.body.bounce.set(1);
-                    alien.body.velocity.set(0, Aliens.alienSpeed+level);
+                    alien.body.velocity.set(0, Aliens.alienSpeed+level*level);
                 }
             }
         }

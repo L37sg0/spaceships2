@@ -94,14 +94,15 @@ var GaugeLevel = {
         });
     },
     update      : function(){
-        //this.arg = arg;
-        level += 1;
-        if(level >= 100){
-            level = 100;
+        if(level < 100){
+            level += 1;
+            levelText.setText('Level: '+level);
+            Ship.initialize(shipConstructors[playerShip]);
+            backgroundSpeed = level;
         }
-        levelText.setText('Level: '+level);
-        Ship.initialize(shipConstructors[playerShip]);
-        backgroundSpeed = level;
+        if(level >= 20){
+            level = 20;
+        }
         //GameScene.end();
     },
     setnull     : function(){
@@ -123,14 +124,14 @@ var GaugeScores = {
     update      : function(arg){
         this.arg = arg;
         scores += this.arg;
-        if(scores >= 100*level){
+        if(scores >= 1000*level*level){
             console.log(level);
             GaugeLevel.update();
         }
         scoresText.setText('Scores: '+Math.floor(scores));
     },
     setnull     : function(){
-        scoresText.destroy();
+        scoresText.kill();
     }
 }
 var GaugeBoss = {

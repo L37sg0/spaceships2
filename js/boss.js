@@ -12,16 +12,17 @@ var Boss = {
         }
         let i = game.rnd.integerInRange(0,3);
         let sprite_image = bosses[i];//[0];
-        let energy = game.rnd.integerInRange(10,50)*level;//bosses[i][1];//*1.2;
+        let energy = game.rnd.integerInRange(50,100)*level;//bosses[i][1];//*1.2;
         let bossVelX = game.rnd.integerInRange(20,80)+level;//bosses[i][2]*1.2;
         let bossVelY = game.rnd.integerInRange(20,80)+level;//bosses[i][2]*1.2;
         let bossBulletTime = game.rnd.integerInRange(500,1000)-level;//level*10;//bosses[i][3]/1.2;
         let shoot = 'bossbullet';
+        let bossSize = game.rnd.integerInRange(80,200);
 
         bossDamage = game.rnd.integerInRange(1,5)+level;
 
         bossBody = game.add.sprite(game.world.width*0.5, game.world.height*0.5-100, sprite_image);        
-        bossBody.scale.setTo(90/bossBody.width, 90/bossBody.height);
+        bossBody.scale.setTo(bossSize/bossBody.width, bossSize/bossBody.height);
         game.physics.enable(bossBody, Phaser.Physics.ARCADE);
         bossBody.enableBody = true;
         bossBody.anchor.set(0.5);
@@ -66,7 +67,7 @@ var Boss = {
     shoot : function(){
         bossBullet = bossBullets.getFirstExists(false);
         if(bossBullet)
-        {   shoot.play();
+        {   //shoot.play();
             bossBulleX = bossBody.x;
             bossBulleY = bossBody.y+bossBody.height/2;
             bossBullet.reset(bossBulleX, bossBulleY);
