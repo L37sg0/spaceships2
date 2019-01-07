@@ -13,6 +13,7 @@ var shipConstructors = [
     {'sprite_image':'ship2', 'energy':30, 'shoot':'bullet2', 'gun1':0, 'gun2':30, 'gun3':30, 'damage':2, 'speed':1.6},
     {'sprite_image':'ship3', 'energy':20, 'shoot':'bullet3', 'gun1':30, 'gun2':0, 'gun3':0, 'damage':3, 'speed':2.4},
 ]
+//shipConstructors[2].gun2 = 30;
 var Ship = {
     shootTime : 240,
 
@@ -38,7 +39,7 @@ var Ship = {
         //shipEnergy = game.add.sprite(game.world.width-90, game.world.height-20, 'energy');
         //shipEnergy.scale.setTo(this.energy*level/shipEnergy.width, 10/shipEnergy.height);
 
-        shipEnergy = game.add.text(game.world.width-90, game.world.height-20, constructor.energy+level,{
+        shipEnergy = game.add.text(game.world.width-90, game.world.height-20, (constructor.energy+level),{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -124,12 +125,12 @@ var Ship = {
         shipBullet1 = shipBullets.getFirstExists(false);
         shipBullet2 = shipBullets2.getFirstExists(false);
         shipBullet3 = shipBullets3.getFirstExists(false);
-        shipBullet4 = shipBullets4.getFirstExists(false);
-        shipBullet5 = shipBullets5.getFirstExists(false);
-        shipBullet6 = shipBullets6.getFirstExists(false);
+        //shipBullet4 = shipBullets4.getFirstExists(false);
+        //shipBullet5 = shipBullets5.getFirstExists(false);
+        //shipBullet6 = shipBullets6.getFirstExists(false);
 
         if(shipBullet1)
-        {   //shoot.play();
+        {   shoot.play();
             shipBulletX = shipBody.x;
             shipBulletY = shipBody.y-shipBody.height/2;
 
@@ -137,7 +138,7 @@ var Ship = {
             shipBullet1.body.velocity.y -= Ship.shootSpeed;
         }
         if(shipBullet2)
-        {   //shoot.play();
+        {   shoot.play();
             shipBullet2X = shipBody.x-15;
             shipBulletY = shipBody.y-shipBody.height/2;
 
@@ -146,30 +147,30 @@ var Ship = {
             //shipBullet2.body.velocity.x -= Ship.shootSpeed;
         }
         if(shipBullet3)
-        {   //shoot.play();
+        {   shoot.play();
             shipBullet3X = shipBody.x+15;
             shipBulletY = shipBody.y-shipBody.height/2;
 
             shipBullet3.reset(shipBullet3X, shipBulletY);
             shipBullet3.body.velocity.y -= Ship.shootSpeed;
         }
-        if(shipBullet4)
+        /*if(shipBullet4)
         {   //shoot.play();
             shipBullet4X = shipBody.x+15;
-            shipBulletY = shipBody.y+15//shipBody.height/3;
+            shipBulletY = shipBody.y+shipBody.height/2;
 
             shipBullet4.reset(shipBullet4X, shipBulletY);
             shipBullet4.body.velocity.y -= Ship.shootSpeed;
-            shipBullet4.body.velocity.x -= Ship.shootSpeed/4;
+            //shipBullet4.body.velocity.x += Ship.shootSpeed/4;
         }
         if(shipBullet5)
         {   //shoot.play();
             shipBullet5X = shipBody.x-15;
-            shipBulletY = shipBody.y+15//shipBody.height/3;
+            shipBulletY = shipBody.y+shipBody.height/2;
 
             shipBullet5.reset(shipBullet5X, shipBulletY);
             shipBullet5.body.velocity.y -= Ship.shootSpeed;
-            shipBullet5.body.velocity.x += Ship.shootSpeed/4;
+            //shipBullet5.body.velocity.x -= Ship.shootSpeed/4;
         }
         if(shipBullet6)
         {   //shoot.play();
@@ -177,8 +178,8 @@ var Ship = {
             shipBulletY = shipBody.y+shipBody.height/2;
 
             shipBullet6.reset(shipBullet6X, shipBulletY);
-            shipBullet6.body.velocity.y += Ship.shootSpeed;
-        }
+            shipBullet6.body.velocity.y -= Ship.shootSpeed;
+        }*/
     },
     /*update      : function(){
         //shipTimer.stop();

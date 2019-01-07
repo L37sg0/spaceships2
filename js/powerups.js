@@ -1,4 +1,6 @@
 //PowerUps
+var energyPower;
+
 var Energy = {
     initialize  :   function(){
         let energyPowerInterval = game.rnd.integerInRange(10, 30);
@@ -8,7 +10,7 @@ var Energy = {
 
     },
     newEnergy   :   function(){
-        let energyPowerX = game.rnd.integerInRange(0, game.world.width);
+        let energyPowerX = game.rnd.integerInRange(20, game.world.width-20);
         energyPower = game.add.sprite(energyPowerX, 0, "life");      
         energyPower.scale.setTo(20/energyPower.width, 20/energyPower.height);
         game.physics.enable(energyPower, Phaser.Physics.ARCADE);

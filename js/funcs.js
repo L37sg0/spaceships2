@@ -63,6 +63,11 @@
         console.log('shiphitboss');
     }
 
+    function ShipGetBonus(energyPower, shipBody){
+        console.log('Bonus');
+        energyPower.kill();
+    }
+
     function explode(obj)
     {
             //boom.play();

@@ -210,7 +210,7 @@ var GameScene = {
         backgroundSpeed = level;
         Ship.initialize(shipConstructors[playerShip]);
         shipSpeedTimer.start();
-        Energy.initialize();
+        //Energy.initialize();
         GaugeDistance.initialize();
         GaugeLevel.initialize();
         GaugeScores.initialize();

@@ -65,6 +65,16 @@ var HangarMenu = {
         backbutton.inputEnabled = true;
         backbutton.events.onInputDown.add(HangarMenu.close, this);
 
+        gunsbutton =  game.add.text(game.world.width-50, 440, '',{//'Guns',{
+            font: "18px Arial",
+            fill: "#e5e5e5",
+            align: "left",
+            backgroundColor: "#2582583D"
+        });
+        gunsbutton.anchor.set(0.5);
+        gunsbutton.inputEnabled = true;
+        //gunsbutton.events.onInputDown.add(GunsMenu.open, this);
+
         Ship.initialize(shipConstructors[playerShip]);
     },
     close   : function(){

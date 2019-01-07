@@ -17,7 +17,7 @@ var Boss = {
         let bossVelY = game.rnd.integerInRange(20,80)+level;//bosses[i][2]*1.2;
         let bossBulletTime = game.rnd.integerInRange(500,1000)-level;//level*10;//bosses[i][3]/1.2;
         let shoot = 'bossbullet';
-        let bossSize = game.rnd.integerInRange(80,200);
+        let bossSize = game.rnd.integerInRange(80,100);
 
         bossDamage = game.rnd.integerInRange(1,5)+level;
 

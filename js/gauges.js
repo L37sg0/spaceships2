@@ -39,7 +39,7 @@ var GaugeDistance = {
             distanceText.destroy();
         }
         distance = game.rnd.integerInRange(50,100)+level;
-        distanceText = game.add.text(10, 50, 'New Planet: '+distance+' ly.',{
+        distanceText = game.add.text(10, 50, '',{//'New Planet: '+distance+' ly.',{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -52,7 +52,7 @@ var GaugeDistance = {
             GaugeDistance.initialize();
         }
         distance -= 1;
-        distanceText.setText('New Planet: '+distance+' ly.');
+        //distanceText.setText('New Planet: '+distance+' ly.');
     },
     setnull     : function(){
         distanceText.destroy();
@@ -86,7 +86,7 @@ var GaugeLevel = {
         if(levelText){
             levelText.destroy();
         }
-        levelText = game.add.text(10, 75, 'Level: '+level,{
+        levelText = game.add.text(10, 75, '',{//'Level: '+level,{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -96,8 +96,8 @@ var GaugeLevel = {
     update      : function(){
         if(level < 100){
             level += 1;
-            levelText.setText('Level: '+level);
-            Ship.initialize(shipConstructors[playerShip]);
+            //levelText.setText('');//'Level: '+level);
+            //Ship.initialize(shipConstructors[playerShip]);
             backgroundSpeed = level;
         }
         if(level >= 20){
@@ -140,7 +140,7 @@ var GaugeBoss = {
             GaugeBoss.setnull();
         }
         time = 60;
-        timeText = game.add.text(10, 100, 'New Boss in: '+time,{
+        timeText = game.add.text(10, 100, '',{//'New Boss in: '+time,{
             font: "15px Arial",
             fill: "#e5e5e5",
             align: "center",
@@ -156,7 +156,7 @@ var GaugeBoss = {
             GaugeBoss.initialize();
         }
         time -= 1;
-        timeText.setText('New Boss in: '+time);
+        //timeText.setText('New Boss in: '+time);
     },
     setnull     : function(){
         timeText.destroy();
